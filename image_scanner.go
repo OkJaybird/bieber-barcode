@@ -227,6 +227,22 @@ func (s *ImageScanner) SetASCIISymbology(
 	return s
 }
 
+// SetBinaryAll enables or disables config Binary mode decoding set for
+// all symbologies.
+func (s *ImageScanner) SetBinaryAll(enabled bool) *ImageScanner {
+	return s.SetBinarySymbology(None, enabled)
+}
+
+// SetBinarySymbology enables or disables config Binary mode decoding set
+// for a specific SymbolType.
+func (s *ImageScanner) SetBinarySymbology(
+	symbology SymbolType,
+	enabled bool,
+) *ImageScanner {
+	s.setBooleanConfig(C.ZBAR_CFG_BINARY, symbology, enabled)
+	return s
+}
+
 // SetMinLengthAll sets a minimum data length for all symbologies.
 func (s *ImageScanner) SetMinLengthAll(length int) *ImageScanner {
 	return s.SetMinLengthSymbology(None, length)
